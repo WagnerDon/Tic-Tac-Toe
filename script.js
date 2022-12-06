@@ -12,6 +12,11 @@ let winnerId = [];
 let winner = "";
 let save = [];
 
+function click() {
+    sounds.put.currentTime = 0.35;
+    sounds.put.play();
+}
+
 function renderTicTacToe() {
     check();
     let content = document.getElementById('content');
@@ -150,8 +155,7 @@ function whichOne(get) {
         turn = "red";
     }
     get.parentNode.innerHTML += `<div class="unclick"></div>`;
-    sounds.put.currentTime = 0.35;
-    sounds.put.play();
+    click();
 }
 
 function endScreen() {
@@ -175,5 +179,5 @@ function replay() {
     renderTicTacToe();
     count = 0;
     save = [];
-    sounds.put.play();
+    click();
 }
