@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/trophy.png">
+    <script src="script.js"></script>
+    <title>Tic Tac Toe</title>
+</head>
+
+<body onload="renderTicTacToe()" class="d-flex justify-content-evenly align-items-center">
+    <div id="redd" class="position-relative transition">
+        <img id="red" class="transition" src="img/red.png">
+        <div class="symbol d-flex justify-content-center align-items-center flex-column">
+            <p>Player 1</p>
+            <img src="img/cross.png">
+        </div>
+
+    </div>
+    <div class="content">
+        <table>
+            <tbody id="content"></tbody>
+        </table>
+    </div>
+    <div id="blued" class="position-relative transition">
+        <img id="blue" class="transition" src="img/blue.png">
+        <div class="symbol d-flex justify-content-center align-items-center flex-column">
+            <p>Player 2</p>
+            <img src="img/circle.png">
+        </div>
+    </div>
+</body>
+
+</html>
