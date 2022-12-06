@@ -18,8 +18,8 @@
 </head>
 
 <body onload="renderTicTacToe()" class="d-flex justify-content-evenly align-items-center">
-    <div id="redd" class="position-relative transition">
-        <img id="red" class="transition" src="img/red.png">
+    <div id="red" class="position-relative transition">
+        <img src="img/red.png">
         <div class="symbol d-flex justify-content-center align-items-center flex-column">
             <p>Player 1</p>
             <img src="img/cross.png">
@@ -27,12 +27,12 @@
 
     </div>
     <div class="content">
-        <table>
+        <table class="position-relative" id="table">
             <tbody id="content"></tbody>
         </table>
     </div>
-    <div id="blued" class="position-relative transition">
-        <img id="blue" class="transition" src="img/blue.png">
+    <div id="blue" class="position-relative transition">
+        <img src="img/blue.png">
         <div class="symbol d-flex justify-content-center align-items-center flex-column">
             <p>Player 2</p>
             <img src="img/circle.png">

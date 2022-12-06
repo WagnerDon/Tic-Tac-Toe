@@ -29,12 +29,17 @@ function renderTicTacToe() {
 let cross = ["cross", "cross", "cross"];
 let circle = ["circle", "circle", "circle"];
 let temp = [];
+let winnerId = [];
 
 function win() {
     if (JSON.stringify(temp) === JSON.stringify(cross) || JSON.stringify(temp) === JSON.stringify(circle)) {
         sounds.win.play();
+        console.log(winnerId);
+        console.log(temp);
+        document.getElementById('table').innerHTML += `<div class="unclick"></div>`;
     } else {
         temp = [];
+        winnerId = [];
     }
 }
 
@@ -42,6 +47,7 @@ function diagonal() {
     for (let i = 0; i < 3; i++) {
         if (document.getElementById(i + i.toString()).firstChild) {
             temp.push(document.getElementById(i + i.toString()).firstChild.name);
+            winnerId.push(document.getElementById(i + i.toString()))
         }
     }
     win();
@@ -49,6 +55,7 @@ function diagonal() {
     for (let i = 0; i < 3; i++) {
         if (document.getElementById(i + x.toString()).firstChild) {
             temp.push(document.getElementById(i + x.toString()).firstChild.name);
+            winnerId.push(document.getElementById(i + x.toString()))
             x--;
         }
     }
@@ -60,6 +67,7 @@ function vertical() {
         for (let x = 0; x < 3; x++) {
             if (document.getElementById(x + i.toString()).firstChild) {
                 temp.push(document.getElementById(x + i.toString()).firstChild.name);
+                winnerId.push(document.getElementById(x + i.toString()))
             }
         }
         win();
@@ -71,6 +79,7 @@ function horizontal() {
         for (let x = 0; x < 3; x++) {
             if (document.getElementById(i + x.toString()).firstChild) {
                 temp.push(document.getElementById(i + x.toString()).firstChild.name);
+                winnerId.push(document.getElementById(i + x.toString()))
             }
         }
         win();
@@ -81,14 +90,14 @@ function check() {
     let user = document.getElementById(turn);
     if (turn === "red") {
         user.style.boxShadow = "0 0 80px rgb(224, 35, 13)";
+        user.style.opacity = "100%";
         document.getElementById('blue').style.boxShadow = "unset";
-        document.getElementById('redd').style.opacity = "100%";
-        document.getElementById('blued').style.opacity = "50%";
-    } else {
+        document.getElementById('blue').style.opacity = "50%";
+    } else if (turn === "blue") {
         user.style.boxShadow = "0 0 80px rgb(84 187 255)";
+        user.style.opacity = "100%";
         document.getElementById('red').style.boxShadow = "unset";
-        document.getElementById('blued').style.opacity = "100%";
-        document.getElementById('redd').style.opacity = "50%";
+        document.getElementById('red').style.opacity = "50%";
     }
 }
 
