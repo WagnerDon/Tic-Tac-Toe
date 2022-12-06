@@ -89,3 +89,28 @@ table tr td:last-child {
     transition: 250ms;
     cursor: pointer;
 }
+
+.card-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.card {
+    padding: 20px;
+}
+
+.card a {
+    width: 100px !important;
+}
+
+h3 {
+    margin: 10px 0 !important;
+}
+
+.card img {
+    height: 175px;
+    width: 175px;
+}

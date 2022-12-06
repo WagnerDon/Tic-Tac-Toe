@@ -4,6 +4,13 @@ let sounds = {
     win: new Audio('sound/win.mp3'),
     no: new Audio('sound/no.mp3'),
 }
+let cross = ["cross", "cross", "cross"];
+let circle = ["circle", "circle", "circle"];
+count = 0;
+let temp = [];
+let winnerId = [];
+let winner = "";
+let save = [];
 
 function renderTicTacToe() {
     check();
@@ -26,36 +33,48 @@ function renderTicTacToe() {
     }
 }
 
-let cross = ["cross", "cross", "cross"];
-let circle = ["circle", "circle", "circle"];
-let temp = [];
-let winnerId = [];
-
 function win() {
     if (JSON.stringify(temp) === JSON.stringify(cross) || JSON.stringify(temp) === JSON.stringify(circle)) {
         sounds.win.play();
-        console.log(winnerId);
-        console.log(temp);
-        document.getElementById('table').innerHTML += `<div class="unclick"></div>`;
+        save = temp;
+        if (temp[0] === "cross") {
+            winner = "Player 1";
+        }
+        else {
+            winner = "Player 2";
+        }
+        mark();
+        setTimeout(endScreen, 1000);
     } else {
         temp = [];
         winnerId = [];
     }
 }
 
-function diagonal() {
+function mark() {
+    for (let x of winnerId) {
+        document.getElementById(x).style.boxShadow = "0 0 80px rgba(144, 238, 144, 0.5)";
+        document.getElementById(x).style.backgroundColor = "rgba(144, 238, 144, 0.7)";
+        document.getElementById(x).style.borderRadius = "10px";
+    }
+}
+
+function diagonal1() {
     for (let i = 0; i < 3; i++) {
         if (document.getElementById(i + i.toString()).firstChild) {
             temp.push(document.getElementById(i + i.toString()).firstChild.name);
-            winnerId.push(document.getElementById(i + i.toString()))
+            winnerId.push(i + i.toString())
         }
     }
     win();
+}
+
+function diagonal2() {
     let x = 2;
     for (let i = 0; i < 3; i++) {
         if (document.getElementById(i + x.toString()).firstChild) {
             temp.push(document.getElementById(i + x.toString()).firstChild.name);
-            winnerId.push(document.getElementById(i + x.toString()))
+            winnerId.push(i + x.toString())
             x--;
         }
     }
@@ -67,7 +86,7 @@ function vertical() {
         for (let x = 0; x < 3; x++) {
             if (document.getElementById(x + i.toString()).firstChild) {
                 temp.push(document.getElementById(x + i.toString()).firstChild.name);
-                winnerId.push(document.getElementById(x + i.toString()))
+                winnerId.push(x + i.toString())
             }
         }
         win();
@@ -79,7 +98,7 @@ function horizontal() {
         for (let x = 0; x < 3; x++) {
             if (document.getElementById(i + x.toString()).firstChild) {
                 temp.push(document.getElementById(i + x.toString()).firstChild.name);
-                winnerId.push(document.getElementById(i + x.toString()))
+                winnerId.push(i + x.toString())
             }
         }
         win();
@@ -104,11 +123,22 @@ function check() {
 function set(i, string) {
     let id = i + string;
     let get = document.getElementById(id);
+    count++;
     whichOne(get);
     check();
     horizontal();
+    diagonal2();
     vertical();
-    diagonal();
+    diagonal1();
+    even();
+}
+
+function even() {
+    if (save.length < 3 && count === 9) {
+        renderTicTacToe();
+        sounds.no.play();
+        count = 0;
+    }
 }
 
 function whichOne(get) {
@@ -121,5 +151,29 @@ function whichOne(get) {
     }
     get.parentNode.innerHTML += `<div class="unclick"></div>`;
     sounds.put.currentTime = 0.35;
+    sounds.put.play();
+}
+
+function endScreen() {
+    document.getElementById('card').classList.remove("d-none");
+    document.getElementById('card').innerHTML = "";
+    document.getElementById('card').innerHTML += `
+    <div class="d-flex justify-content-center align-items-center text-center">
+        <div class="card d-flex align-items-center" style="width: 18rem;">
+            <div class="d-flex justify-content-center align-itemns-center">
+                <img src="img/trophy.png" class="card-img-top">
+            </div>
+            <h3 class="card-title">${winner} is the winner!</h3>
+            <a onclick="replay()" class="btn btn-primary">Revanche!</a>
+        </div>
+    </div>
+    `;
+}
+
+function replay() {
+    document.getElementById('card').classList.add("d-none");
+    renderTicTacToe();
+    count = 0;
+    save = [];
     sounds.put.play();
 }
