@@ -113,12 +113,12 @@ function horizontal() {
 function check() {
     let user = document.getElementById(turn);
     if (turn === "red") {
-        user.style.boxShadow = "0 0 80px rgb(224, 35, 13)";
+        user.style.boxShadow = "0 0 50px rgb(224, 35, 13)";
         user.style.opacity = "100%";
         document.getElementById('blue').style.boxShadow = "unset";
         document.getElementById('blue').style.opacity = "50%";
     } else if (turn === "blue") {
-        user.style.boxShadow = "0 0 80px rgb(84 187 255)";
+        user.style.boxShadow = "0 0 50px rgb(84 187 255)";
         user.style.opacity = "100%";
         document.getElementById('red').style.boxShadow = "unset";
         document.getElementById('red').style.opacity = "50%";
