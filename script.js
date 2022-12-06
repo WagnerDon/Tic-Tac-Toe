@@ -3,6 +3,7 @@ let sounds = {
     put: new Audio('sound/put.mp3'),
     win: new Audio('sound/win.mp3'),
     no: new Audio('sound/no.mp3'),
+    clap: new Audio('sound/clap.mp3'),
 }
 let cross = ["cross", "cross", "cross"];
 let circle = ["circle", "circle", "circle"];
@@ -40,7 +41,9 @@ function renderTicTacToe() {
 
 function win() {
     if (JSON.stringify(temp) === JSON.stringify(cross) || JSON.stringify(temp) === JSON.stringify(circle)) {
+        document.getElementById('card').classList.remove("d-none");
         sounds.win.play();
+        sounds.clap.play();
         save = temp;
         if (temp[0] === "cross") {
             winner = "Player 1";
@@ -159,7 +162,6 @@ function whichOne(get) {
 }
 
 function endScreen() {
-    document.getElementById('card').classList.remove("d-none");
     document.getElementById('card').innerHTML = "";
     document.getElementById('card').innerHTML += `
     <div class="d-flex justify-content-center align-items-center text-center">
@@ -180,4 +182,5 @@ function replay() {
     count = 0;
     save = [];
     click();
+    sounds.win.pause();
 }
