@@ -5,9 +5,6 @@ let sounds = {
     no: new Audio('sound/no.mp3'),
 }
 
-let cross = 0;
-let circle = 0;
-
 function renderTicTacToe() {
     check();
     let content = document.getElementById('content');
@@ -29,16 +26,43 @@ function renderTicTacToe() {
     }
 }
 
+let cross = ["cross", "cross", "cross"];
+let circle = ["circle", "circle", "circle"];
+let temp = [];
+
+function win() {
+    if (JSON.stringify(temp) === JSON.stringify(cross) || JSON.stringify(temp) === JSON.stringify(circle)) {
+        sounds.win.play();
+    } else {
+        temp = [];
+    }
+}
+
+function diagonal() {
+    for (let i = 0; i < 3; i++) {
+        if (document.getElementById(i + i.toString()).firstChild) {
+            temp.push(document.getElementById(i + i.toString()).firstChild.name);
+        }
+    }
+    win();
+    let x = 2;
+    for (let i = 0; i < 3; i++) {
+        if (document.getElementById(i + x.toString()).firstChild) {
+            temp.push(document.getElementById(i + x.toString()).firstChild.name);
+            x--;
+        }
+    }
+    win();
+}
+
 function vertical() {
     for (let i = 0; i < 3; i++) {
-        if (document.getElementById("0" + i).firstChild && document.getElementById("1" + i).firstChild && document.getElementById("2" + i).firstChild) {
-            let first = document.getElementById("0" + i).firstChild.id;
-            let second = document.getElementById("1" + i).firstChild.id;
-            let third = document.getElementById("2" + i).firstChild.id;
-            if (first === second && second === third) {
-                sounds.win.play();
+        for (let x = 0; x < 3; x++) {
+            if (document.getElementById(x + i.toString()).firstChild) {
+                temp.push(document.getElementById(x + i.toString()).firstChild.name);
             }
         }
+        win();
     }
 }
 
@@ -46,25 +70,10 @@ function horizontal() {
     for (let i = 0; i < 3; i++) {
         for (let x = 0; x < 3; x++) {
             if (document.getElementById(i + x.toString()).firstChild) {
-                let get = document.getElementById(i + x.toString()).firstChild.id;
-                if (get === "cross") {
-                    cross++;
-                    winCondition(cross);
-                }
-                if (get === "circle") {
-                    circle++;
-                    winCondition(circle);
-                }
+                temp.push(document.getElementById(i + x.toString()).firstChild.name);
             }
         }
-        cross = 0;
-        circle = 0;
-    }
-}
-
-function winCondition(x) {
-    if (x === 3) {
-        sounds.win.play();
+        win();
     }
 }
 
@@ -90,25 +99,18 @@ function set(i, string) {
     check();
     horizontal();
     vertical();
-}
-
-function sound(value) {
-    if (value === "click") {
-        sounds.put.currentTime = 0.35;
-        sounds.put.play();
-    } else {
-        sounds.no.play();
-    }
+    diagonal();
 }
 
 function whichOne(get) {
     if (turn === "red") {
-        get.innerHTML = `<img id="cross" src="img/cross.png">`;
+        get.innerHTML = `<img name="cross" src="img/cross.png">`;
         turn = "blue";
     } else {
-        get.innerHTML = `<img id="circle" src="img/circle.png">`;
+        get.innerHTML = `<img name="circle" src="img/circle.png">`;
         turn = "red";
     }
     get.parentNode.innerHTML += `<div class="unclick"></div>`;
-    sound('click');
+    sounds.put.currentTime = 0.35;
+    sounds.put.play();
 }
