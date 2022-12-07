@@ -162,8 +162,7 @@ function whichOne(get) {
 }
 
 function endScreen() {
-    document.getElementById('card').innerHTML = "";
-    document.getElementById('card').innerHTML += `
+    document.getElementById('card').innerHTML = `
     <div class="d-flex justify-content-center align-items-center text-center">
         <div class="card d-flex align-items-center" style="width: 18rem;">
             <div class="d-flex justify-content-center align-itemns-center">
