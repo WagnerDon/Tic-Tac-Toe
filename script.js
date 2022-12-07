@@ -147,6 +147,8 @@ function even() {
         sounds.no.play();
         count = 0;
     }
+    temp = [];
+    winnerId = [];
 }
 
 function whichOne(get) {
