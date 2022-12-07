@@ -180,9 +180,8 @@ function endScreen() {
 function replay() {
     document.getElementById('card').classList.add("d-none");
     document.getElementById('card').innerHTML = "";
-    renderTicTacToe();
     count = 0;
     save = [];
+    renderTicTacToe();
     click();
-    sounds.win.pause();
 }
