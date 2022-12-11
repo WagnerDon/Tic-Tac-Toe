@@ -92,7 +92,7 @@ table tr td:last-child {
     height: 10px;
     animation: lines 500ms ease-in;
     z-index: 1;
-    width: 500px;
+    width: 600px;
 }
 
 @keyframes lines {
@@ -101,11 +101,11 @@ table tr td:last-child {
     }
 
     50% {
-        width: 525px;
+        width: 650px;
     }
 
     100% {
-        width: 500px;
+        width: 600px;
     }
 }
 
@@ -115,11 +115,11 @@ table tr td:last-child {
     }
 
     50% {
-        transform: scale(1.1);
+        transform: scale(1.4);
     }
 
     100% {
-        transform: scale(1.0);
+        transform: scale(1.2);
     }
 }
 
@@ -142,6 +142,7 @@ table tr td:last-child {
     padding: 20px;
     z-index: 2;
     animation: popUp 500ms ease-in-out;
+    transform: scale(1.2);
 }
 
 .card a {
