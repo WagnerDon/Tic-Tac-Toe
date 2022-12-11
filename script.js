@@ -39,7 +39,7 @@ function renderTicTacToe() {
     }
 }
 
-function win() {
+function win(value) {
     if (JSON.stringify(temp) === JSON.stringify(cross) || JSON.stringify(temp) === JSON.stringify(circle)) {
         document.getElementById('card').classList.remove("d-none");
         sounds.win.play();
@@ -52,12 +52,42 @@ function win() {
             winner = "Player 2";
         }
         mark();
-        setTimeout(endScreen, 1000);
+        animation(value);
+        setTimeout(endScreen, 2250);
     } else {
         temp = [];
         winnerId = [];
     }
 }
+
+function animation(value) {
+    if (value === "d1") {
+        let pos = winnerId[1];
+        document.getElementById(pos).innerHTML += `
+            <div class="strike" style="transform: rotate(45deg);"></div>
+        `;
+    }
+    if (value === "d2") {
+        let pos = winnerId[1];
+        document.getElementById(pos).innerHTML += `
+            <div class="strike" style="transform: rotate(135deg);"></div>
+        `;
+    }
+    if (value === "v") {
+        let pos = winnerId[1];
+        document.getElementById(pos).innerHTML += `
+            <div class="strike" style="transform: rotate(90deg);"></div>
+        `;
+    }
+    if (value === "h") {
+        let pos = winnerId[1];
+        document.getElementById(pos).innerHTML += `
+            <div class="strike"></div>
+        `;
+    }
+}
+
+
 
 function mark() {
     for (let x of winnerId) {
@@ -74,7 +104,7 @@ function diagonal1() {
             winnerId.push(i + i.toString())
         }
     }
-    win();
+    win("d1");
 }
 
 function diagonal2() {
@@ -86,7 +116,7 @@ function diagonal2() {
             x--;
         }
     }
-    win();
+    win("d2");
 }
 
 function vertical() {
@@ -97,7 +127,7 @@ function vertical() {
                 winnerId.push(x + i.toString())
             }
         }
-        win();
+        win("v");
     }
 }
 
@@ -109,7 +139,7 @@ function horizontal() {
                 winnerId.push(i + x.toString())
             }
         }
-        win();
+        win("h");
     }
 }
 

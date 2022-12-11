@@ -85,6 +85,44 @@ table tr td:last-child {
     min-width: 100%;
 }
 
+.strike {
+    position: absolute;
+    background-color: rgb(0, 0, 0, 0.75);
+    border-radius: 10px;
+    height: 10px;
+    animation: lines 500ms ease-in;
+    z-index: 1;
+    width: 500px;
+}
+
+@keyframes lines {
+    0% {
+        width: 0px;
+    }
+
+    50% {
+        width: 525px;
+    }
+
+    100% {
+        width: 500px;
+    }
+}
+
+@keyframes popUp {
+    0% {
+        transform: scale(0.0);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}
+
 .min-div:hover {
     background-color: rgba(144, 238, 144, 0.5);
     border-radius: 10px;
@@ -102,6 +140,8 @@ table tr td:last-child {
 
 .card {
     padding: 20px;
+    z-index: 2;
+    animation: popUp 500ms ease-in-out;
 }
 
 .card a {
